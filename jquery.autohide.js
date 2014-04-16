@@ -3,7 +3,7 @@ JQuery Autohide by Carlos Cabo
 https://github.com/carloscabo/jquery-autohide-plugin
 
 // Usage
-$('.element.to-hide-show').autohide_timeout({
+$('.element-to-hide-show').autohide_timeout({
   buttons: '.button-1',
   buttons_events: 'click', // default is click
   timeout: 3000
