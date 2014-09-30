@@ -11,6 +11,7 @@ Jquery plugin to show / hide / autohide elements, like shopping carts or help bu
     $('.element-to-hide-show').autohide_timeout({
       buttons: '.button-1',
       buttons_events: 'click', // default is click
+      hide_on_start: true, // hides target element on load, default is true
       timeout: 3000
     });
 
@@ -19,6 +20,8 @@ Jquery plugin to show / hide / autohide elements, like shopping carts or help bu
 `timeout` time until the element autohides in miliseconds.
 
 `buttons_events` events used for the button element. Default is `click` event, but you can also use `mouseenter` or both (see sample below).
+
+`hide_on_start` hides the target element on load, to be sure its initially hidden
 
 `buttons` the element that acts as trigger of the visibility... usually a button. You can provide several elements at once with JQuery syntax (comma separated values) this way:
 
