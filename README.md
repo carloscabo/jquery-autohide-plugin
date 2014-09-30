@@ -23,7 +23,7 @@ Jquery plugin to show / hide / autohide elements, like shopping carts or help bu
 
 `hide_on_start` hides the target element on load, to be sure its initially hidden
 
-`buttons` the element that acts as trigger of the visibility... usually a button. You can provide several elements at once with JQuery syntax (comma separated values) this way:
+`buttons` the elements that acts as trigger of the visibility... usually a button. You can provide several elements at once with JQuery syntax (comma separated values) this way:
 
     $('.element-to-hide-show').autohide_timeout({
       buttons: '.button-1, .button-2, .button-3',
