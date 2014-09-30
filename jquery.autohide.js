@@ -57,7 +57,7 @@ $.fn.autohide_timeout = function(options) {
       e.preventDefault();
       $el.ah_timeout = setTimeout(function(){
         $el.aht_hide();
-      }, 400);
+      }, def.timeout);
     });
   }
 };
