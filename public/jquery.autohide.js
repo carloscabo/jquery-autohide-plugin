@@ -56,6 +56,21 @@ a_h_t.init = function (el, options) {
   // Clear timeout
   def.$content.ah_timeout = null;
 
+  // Enter in the content div
+  def.$content.on('mouseenter', function(e) {
+    e.preventDefault();
+    console.log('enter');
+    clearTimeout(def.$content.ah_timeout);
+  });
+
+  // Leave the content div
+  def.$content.on('mouseleave', function(e) {
+    e.preventDefault();
+    def.$content.ah_timeout = setTimeout(function(){
+      a_h_t.hideContent(def);
+    }, def.timeout);
+  });
+
   // Mouse events
   $el.on(def.buttons_events, function(e) {
     e.preventDefault();
@@ -71,19 +86,6 @@ a_h_t.init = function (el, options) {
     }, def.timeout);
   });
 
-  // Enter in the content div
-  def.$content.on('mouseenter', function(e) {
-    e.preventDefault();
-    clearTimeout(def.$content.ah_timeout);
-  });
-
-  // Leave the content div
-  def.$content.on('mouseleave', function(e) {
-    e.preventDefault();
-    def.$content.ah_timeout = setTimeout(function(){
-      a_h_t.hideContent(def);
-    }, def.timeout);
-  });
 };
 
 // D.R.Y.
