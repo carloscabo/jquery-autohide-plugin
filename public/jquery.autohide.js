@@ -59,7 +59,6 @@ a_h_t.init = function (el, options) {
   // Enter in the content div
   def.$content.on('mouseenter', function(e) {
     e.preventDefault();
-    console.log('enter');
     clearTimeout(def.$content.ah_timeout);
   });
 

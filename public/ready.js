@@ -20,7 +20,7 @@ $(document).ready(function() {
   $('#another-sample-menu > li > a').autohide_timeout({
     buttons_events: 'mouseenter', // default is click
     content: function(obj) {
-      return obj.parent().find('ul.is-children');
+      return obj.parent().find('ul');
     },
     toggle_class: 'submenu-opened', // Added / removed
     toggle_class_el: function(obj) {
