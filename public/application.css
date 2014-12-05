@@ -1,0 +1,65 @@
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+ }
+
+body {
+  padding: 20px;
+  background-color: #303030;
+  color: #333;
+}
+
+a {
+  color: #ccc;
+}
+a:hover {
+  color: #fff;
+}
+
+p {
+  color: #333;
+}
+
+span {
+  color: #ccc;
+}
+
+/* Elements */
+
+#single-bubble-button {
+  position: relative;
+}
+
+#single-bubble-content {
+  display: none;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  padding: 1em;
+  background-color: #fff;
+  border: 1px solid #666;
+  z-index: 9;
+}
+
+ul#sample-menu {
+  padding: 0;
+}
+
+ul#sample-menu > li {
+  position: relative;
+  float: left;
+  margin-right: 20px;
+}
+
+/*  Hidding 2nd level menu */
+ul#sample-menu > li > ul {
+  display: none;
+  width: 120px;
+  position: absolute;
+  padding: 20px;
+  background-color: pink;
+}
+
+ul#sample-menu > li > ul.submenu-opened {
+  display: block;
+  /*background-color: red;*/
+}
