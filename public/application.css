@@ -16,14 +16,16 @@ a:hover {
 }
 
 p {
-  color: #333;
+  max-width: 500px;
+  color: #999;
 }
 
 span {
   color: #ccc;
 }
 
-/* Elements */
+/* Demos */
+/* Single element with buble and ID */
 
 #single-bubble-button {
   position: relative;
@@ -39,6 +41,8 @@ span {
   border: 1px solid #666;
   z-index: 9;
 }
+
+/* Multilevel menu */
 
 ul#sample-menu {
   padding: 0;
@@ -61,5 +65,34 @@ ul#sample-menu > li > ul {
 
 ul#sample-menu > li > ul.submenu-opened {
   display: block;
-  /*background-color: red;*/
+}
+
+/* Multilevel menu with transition */
+
+ul#another-sample-menu {
+  padding: 0;
+}
+
+ul#another-sample-menu > li {
+  position: relative;
+  float: left;
+  margin-right: 20px;
+}
+
+/*  Hidding 2nd level menu */
+ul#another-sample-menu > li > ul {
+  width: 120px;
+  position: absolute;
+  padding: 20px;
+  background-color: pink;
+  opacity: 0;
+  -webkit-transition: opacity 0.25s ease-in-out;
+     -moz-transition: opacity 0.25s ease-in-out;
+      -ms-transition: opacity 0.25s ease-in-out;
+       -o-transition: opacity 0.25s ease-in-out;
+          transition: opacity 0.25s ease-in-out;
+}
+
+ul#another-sample-menu > li.submenu-opened > ul {
+  opacity: 1;
 }
