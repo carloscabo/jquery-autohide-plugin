@@ -43,7 +43,7 @@ You can also use JQuery _routes_ from the clickable element, in the following sa
       timeout: 1000
     });
 
-One last scenario scenario where the `toglle_class` is asigned to an element relative to the clickable one:
+One last scenario scenario where the `toggle_class` is asigned to an element relative to the clickable one:
 
     $('#another-sample-menu > li > a').autohide_timeout({
       buttons_events: 'mouseenter', // default is click
