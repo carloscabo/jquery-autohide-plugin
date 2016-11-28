@@ -1,32 +1,52 @@
 $(document).ready(function() {
   // La magia aquí!
 
-  $('#single-bubble-button > a').autohide_timeout({
-    buttons_events: 'click', // default is click
-    content: $('#single-bubble-content'),
-    hide_on_start: true, // hides target element on load, default is false
-    timeout: 1000
+  // $('#single-bubble-button > a').autohide_timeout({
+  //   buttons_events: 'click', // default is click
+  //   content: $('#single-bubble-content'),
+  //   hide_on_start: true, // hides target element on load, default is false
+  //   timeout: 1000
+  // });
+
+  // $('#sample-menu > li > a').autohide_timeout({
+  //   buttons_events: 'mouseenter', // default is click
+  //   content: function(object) {
+  //     return object.parent().find('ul.is-children');
+  //   },
+  //   toggle_class: 'submenu-opened', // Added / removed
+  //   timeout: 1000
+  // });
+
+  // $('#another-sample-menu > li > a').autohide_timeout({
+  //   buttons_events: 'mouseenter', // default is click
+  //   content: function(obj) {
+  //     return obj.parent().find('ul');
+  //   },
+  //   toggle_class: 'submenu-opened', // Added / removed
+  //   toggle_class_el: function(obj) {
+  //     return obj.parent();
+  //   },
+  //   timeout: 1000
+  // });
+
+  $block.autohide_timeout({
+    events: 'mouseenter', // default is click
+    $source: function ($el) {
+      return $el.ind('> ul li:not(.call-to-action) a');
+    },
+    $target: function ($el) {
+      var
+        $target = $('.e-megadrop#md-' + obj.attr('href').replace('#', ''));
+      return $target;
+    },
+    onEvents: function ($el) {
+      console.log($el);
+    },
+    onTimeout: function () {
+      $target.hide();
+    },
+    timeout: 1500
   });
 
-  $('#sample-menu > li > a').autohide_timeout({
-    buttons_events: 'mouseenter', // default is click
-    content: function(object) {
-      return object.parent().find('ul.is-children');
-    },
-    toggle_class: 'submenu-opened', // Added / removed
-    timeout: 1000
-  });
-
-  $('#another-sample-menu > li > a').autohide_timeout({
-    buttons_events: 'mouseenter', // default is click
-    content: function(obj) {
-      return obj.parent().find('ul');
-    },
-    toggle_class: 'submenu-opened', // Added / removed
-    toggle_class_el: function(obj) {
-      return obj.parent();
-    },
-    timeout: 1000
-  });
 
 });
