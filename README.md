@@ -1,66 +1,91 @@
 JQuery Autohide plugin
 ======================
 
-Jquery plugin to show / hide / autohide elements, like shopping carts or help bubbles. That elements' visibility is triggered from another element... usually a button or so.
+Jquery plugin to show / hide / autohide elements, like shopping carts or help bubbles, megadrop menus. That elements' visibility is triggered from another element... usually a button, menu item, etc.
 
 ![Smaple snapshop](https://raw.github.com/carloscabo/jquery-autohide-plugin/master/sample-image.png)
 
+## Concepts / naming
+
+`$source` elements originating the events. Usually button, menu items, etc.
+
+`$target` elements to be shown when the event is triggerered from a `$source` element. Usually a menu / information overlay... etc.
+
+`timeout` time (in miliseconds) until the `$target` element autohides.
 
 ## Usage
 
+### 2.1 Easiest sample
+
+We have a `$souce` element ( `#element-to-click` ), that when the default event is trigged on it ( click ), toggles visibility on `$target` element ( `$('#single-bubble-content')` ).
+
+`$target` element will autohide with a timeout ( default is 1500ms ).
+
 ```javascript
 $('#element-to-click').autohide_timeout({
-  buttons_events: 'click', // default is click
-  content: $('#element-to-show-hide'),
-  hide_on_start: true, // hides target element on load, default is false
-  timeout: 1000
+  // timeout: 1000,
+  $target: $('#single-bubble-content')
 });
 ```
 
-`#element-to-show-hide` the element / container we want to show / hide.
-
-`timeout` time until the element autohides in miliseconds.
-
-`buttons_events` events used for the button element. Default is `click` event, but you can also use `mouseenter` or both (see sample below).
-
-`hide_on_start` hides the target element on load, to be sure its initially hidden
-
-You can provide several elements at once with JQuery syntax (comma separated values) this way:
+### 2.2 A complex / complete example
 
 ```javascript
-$('#element-to-click-1, #element-to-click-2').autohide_timeout({
-  buttons_events: 'click', // default is click
-  content: $('#element-to-show-hide'),
-  hide_on_start: true, // hides target element on load, default is false
-  timeout: 1000
-});
+
+  // We chache the jQuery selector
+  var $element = $('#sample-megadrop');
+
+  $element.autohide_timeout({
+
+     // Events to be triggered, default is 'click'
+    events: 'mouseenter',
+
+    // Timeout until the 'onTimeout' function is launched
+    timeout: 2000,
+
+    // $source is used to have several interactive children
+    // elements inside the parent $element, for instance
+    // menú options <li> inside a navigation menu
+    $source: function( $el ) {
+      // $el is $('#sample-megadrop') here, we can set the
+      // children elements relative to it
+      return $el.find('li:not(.exclude) a');
+    },
+
+    // Target elements that will be shown when event is trigged
+    // on $source element(s). The $target element can be relative
+    // to the $source element, as you can see below.
+    $target: function( $source ) {
+      return $source.next('ul.is-children');
+    },
+
+    // What is done when the event is triggered on source element
+    // We have access to the $source and the $target elements
+    // And the original $source event.
+    onEvents: function( $source, $target, event ) {
+      event.preventDefault();
+      // console.log( $source );
+      // console.log( $target );
+      $source.closest('ul').find('.active').removeClass('active');
+      $source.parent('li').addClass('active');
+      $('.megadrop').hide();
+      $target.show();
+    },
+
+    // What to do when is timeout is triggered
+    // onTimeout is triggered when cursor is outside the $sorce
+    // and $target elements.
+    onTimeout: function( $source, $target, event ) {
+      // console.log( event );
+      // console.log( $source );
+      // console.log( $source );
+      $source.parent('li').removeClass('active');
+      $('.megadrop').hide();
+    }
+  });
+
 ```
 
-You can also use JQuery _routes_ from the clickable element, in the following sample the _content_ element to be shown is calculated from the clickable element... and a aditional class is added to the _content_ element using: `toggle_class`.
+## Demos
 
-```javascript
-$('#sample-menu > li > a').autohide_timeout({
-  buttons_events: 'mouseenter', // default is click
-  content: function(object) {
-    return object.parent().find('ul.is-children');
-  },
-  toggle_class: 'submenu-opened', // Added / removed
-  timeout: 1000
-});
-```
-
-One last scenario scenario where the `toggle_class` is asigned to an element relative to the clickable one:
-
-```javascript
-$('#another-sample-menu > li > a').autohide_timeout({
-  buttons_events: 'mouseenter', // default is click
-  content: function(obj) {
-    return obj.parent().find('ul.is-children');
-  },
-  toggle_class: 'submenu-opened', // Added / removed
-  toggle_class_el: function(obj) {
-    return obj.parent();
-  },
-  timeout: 1000
-});
-```
+Take a look to the demos to see some typical usage scenarios.

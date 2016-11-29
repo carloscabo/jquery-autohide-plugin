@@ -24,8 +24,18 @@ span {
   color: #ccc;
 }
 
+ul, ol, li {
+  list-style-type: none;
+  list-style: none;
+}
+
 /* Demos */
 /* Single element with buble and ID */
+
+li.active {
+  background-color: pink;
+  color: #000;
+}
 
 #single-bubble-button {
   position: relative;
@@ -95,4 +105,30 @@ ul#another-sample-menu > li > ul {
 
 ul#another-sample-menu > li.submenu-opened > ul {
   opacity: 1;
+}
+
+ul#sample-megadrop {
+  display: block;
+  clear: both;
+  padding: 0 0 16px 0;
+}
+
+ul#sample-megadrop > li {
+  position: relative;
+  padding-bottom: 20px;
+  float: left;
+  margin-right: 20px;
+}
+
+.megadrop-wrapper {
+  display: block;
+}
+
+.megadrop {
+  display: none;
+  background-color: #ccc;
+}
+
+.megadrop a {
+  color: #000;
 }
