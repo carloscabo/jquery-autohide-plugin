@@ -1,12 +1,11 @@
 $(document).ready(function() {
   // La magia aquí!
 
-  // $('#single-bubble-button > a').autohide_timeout({
-  //   buttons_events: 'click', // default is click
-  //   content: $('#single-bubble-content'),
-  //   hide_on_start: true, // hides target element on load, default is false
-  //   timeout: 1000
-  // });
+  $('#single-bubble-button > a').autohide_timeout({
+    events: 'click', // default is click
+    $target: $('#single-bubble-content'),
+    timeout: 1000
+  });
 
   // $('#sample-menu > li > a').autohide_timeout({
   //   buttons_events: 'mouseenter', // default is click
@@ -29,23 +28,33 @@ $(document).ready(function() {
   //   timeout: 1000
   // });
 
-  $block.autohide_timeout({
+  $('#sample-megadrop').autohide_timeout({
     events: 'mouseenter', // default is click
-    $source: function ($el) {
-      return $el.ind('> ul li:not(.call-to-action) a');
+    timeout: 1500,
+    // Children elements inside the parent element
+    // for instance menú options inside a navigation menu
+    $source: function( $el ) {
+      return $el.find('li:not(.exclude) a');
     },
-    $target: function ($el) {
+    // Target element that will be shown when event is trigged
+    // on source element(s)
+    $target: function( $el ) {
       var
-        $target = $('.e-megadrop#md-' + obj.attr('href').replace('#', ''));
-      return $target;
+        md_id = $el.attr('href').replace('#', '');
+      return $('.megadrop#md-'+md_id);
     },
-    onEvents: function ($el) {
-      console.log($el);
+    onEvents: function( $el, event ) {
+      event.preventDefault();
+      // console.log( $el );
+      $el.closest('ul').find('.active').removeClass('active');
+      $el.parent('li').addClass('active');
+      $('.megadrop').hide();
     },
-    onTimeout: function () {
-      $target.hide();
-    },
-    timeout: 1500
+    onTimeout: function( $el, event ) {
+      // console.log( $el );
+      $el.parent('li').removeClass('active');
+      $('.megadrop').hide();
+    }
   });
 
 
