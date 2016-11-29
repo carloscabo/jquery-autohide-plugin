@@ -36,15 +36,19 @@ $(document).ready(function() {
     $source: function( $el ) {
       return $el.find(' > li > a');
     },
+    $target: function( $source ) {
+      return $source.next('ul');
+    },
     onEvents: function( $source, $target, event ) {
-      $block_1.find('.submenu-opened').removeClass('submenu-opened');
+      $block_2.find('.submenu-opened').removeClass('submenu-opened');
       $target.parent('li').addClass('submenu-opened');
     },
-    onTimeout: function ($source, $target, event) {
-      // console.log( $target );
-      $block_1.find('.submenu-opened').removeClass('submenu-opened');
+    onTimeout: function( $source, $target, event ) {
+      console.log( $target );
+      $block_2.find('.submenu-opened').removeClass('submenu-opened');
     }
   });
+
 
   var $block_3 = $('#sample-megadrop');
   $block_3.autohide_timeout({
