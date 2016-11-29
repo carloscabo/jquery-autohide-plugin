@@ -35,11 +35,18 @@ $('.element-to-hide-show').autohide_timeout({
 
     // Default settings
     $.extend( def, options );
+    console.log( def );
 
     if ( typeof def.$source === 'function' ) {
       def.$source = def.$source( def.$el );
     } else if ( def.$source === null) {
       def.$source = def.$el;
+    }
+
+    if ( def.onTimeout === null ) {
+      def.onTimeout = function() {
+        def.$target.hide();
+      }
     }
 
     def.$source.on( def.events, function(e) {
@@ -48,13 +55,16 @@ $('.element-to-hide-show').autohide_timeout({
       var
         source_e = e,
         $source_e_target = $(source_e.target);
-      def.onEvents( $source_e_target, source_e );
+
+      if (def.onEvents !== null) {
+        def.onEvents( $source_e_target, source_e );
+      }
 
       var
         $target = null;
       if (typeof def.$target === 'function') {
         $target = def.$target( $source_e_target, source_e );
-      } else if (def.$source === null) {
+      } else {
         $target = def.$target;
       }
       $target.show();

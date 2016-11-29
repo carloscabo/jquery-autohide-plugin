@@ -28,6 +28,7 @@ $(document).ready(function() {
   //   timeout: 1000
   // });
 
+/*
   $('#sample-megadrop').autohide_timeout({
     events: 'mouseenter', // default is click
     timeout: 1500,
@@ -56,6 +57,6 @@ $(document).ready(function() {
       $('.megadrop').hide();
     }
   });
-
+*/
 
 });
