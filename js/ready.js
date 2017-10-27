@@ -81,16 +81,53 @@ $(document).ready(function() {
       // console.log( $target );
       $source.closest('ul').find('.active').removeClass('active');
       $source.parent('li').addClass('active');
-      $('.megadrop').hide();
+      $('.megadrop-wrapper-4 .megadrop').hide();
       $target.show();
     },
     // What to do when is timeout is triggered
     onTimeout: function( $source, $target, event ) {
       // console.log( $source );
       $source.parent('li').removeClass('active');
-      $('.megadrop').hide();
+      $('.megadrop-wrapper-4 .megadrop').hide();
     }
   });
 
+  // ----------------------------------
+  // Sample #4. Megadrop
+
+  var $sm_5 = $('#sample-5-megadrop');
+  $sm_5.autohide_timeout({
+    events: 'mouseenter', // default is click
+    timeout: 2000,
+    // Children elements inside the parent element
+    // for instance menú options inside a navigation menu
+    $source: function( $el ) {
+      return $el.find('li:not(.exclude) a');
+    },
+    // Target element that will be shown when event is trigged
+    // on source element(s)
+    $target: function( $source ) {
+      // console.log( $source );
+      var
+        md_id = $source.attr('href').replace('#', '');
+      return $('.megadrop#md-'+md_id);
+    },
+    // What is done when the event is triggered on source element
+    onEvents: function( $source, $target, event ) {
+      event.preventDefault();
+      // console.log( $source );
+      // console.log( $target );
+      $source.closest('ul').find('.active').removeClass('active');
+      $source.parent('li').addClass('active');
+      $('.megadrop-wrapper-5 .megadrop').slideUp();
+      $target.slideDown();
+    },
+    // What to do when is timeout is triggered
+    onTimeout: function( $source, $target, event ) {
+      // console.log( $source );
+      $source.parent('li').removeClass('active');
+      $('.megadrop-wrapper-5 .megadrop').slideUp();
+    }
+  });
 
 });
