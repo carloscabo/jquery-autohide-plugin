@@ -1,15 +1,18 @@
 $(document).ready(function() {
+
   // La magia aquí!
 
-
+  // ----------------------------------
+  // Smaple #1
   $('#single-bubble-button > a').autohide_timeout({
     timeout: 1000,
     $target: $('#single-bubble-content')
   });
 
-
-  var $block_1 = $('#sample-menu');
-  $block_1.autohide_timeout({
+  // ----------------------------------
+  // Smaple #2
+  var $sm_2 = $('#sample-menu-2');
+  $sm_2.autohide_timeout({
     events: 'mouseenter',
     timeout: 1000,
     $source: function( $el ) {
@@ -19,18 +22,20 @@ $(document).ready(function() {
       return $source.next('ul.is-children');
     },
     onEvents: function( $source, $target, event ) {
-      $block_1.find('.submenu-opened').removeClass('submenu-opened');
+      $sm_2.find('.submenu-opened').removeClass('submenu-opened');
       $target.addClass('submenu-opened');
     },
     onTimeout: function( $source, $target, event ) {
       // console.log( $target );
-      $block_1.find('.submenu-opened').removeClass('submenu-opened');
+      $sm_2.find('.submenu-opened').removeClass('submenu-opened');
     }
   });
 
+  // ----------------------------------
+  // Sample #3
 
-  var $block_2 = $('#another-sample-menu');
-  $('#another-sample-menu').autohide_timeout({
+  var $sm_3 = $('#sample-menu-3');
+  $sm_3.autohide_timeout({
     events: 'mouseenter', // default is click
     timeout: 1000,
     $source: function( $el ) {
@@ -40,15 +45,17 @@ $(document).ready(function() {
       return $source.next('ul');
     },
     onEvents: function( $source, $target, event ) {
-      $block_2.find('.submenu-opened').removeClass('submenu-opened');
+      $sm_3.find('.submenu-opened').removeClass('submenu-opened');
       $target.parent('li').addClass('submenu-opened');
     },
     onTimeout: function( $source, $target, event ) {
-      console.log( $target );
-      $block_2.find('.submenu-opened').removeClass('submenu-opened');
+      // console.log( $target );
+      $sm_3.find('.submenu-opened').removeClass('submenu-opened');
     }
   });
 
+  // ----------------------------------
+  // Sample #4. Megadrop
 
   var $block_3 = $('#sample-megadrop');
   $block_3.autohide_timeout({

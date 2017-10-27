@@ -1,8 +1,8 @@
 /*
 JQuery Autohide by Carlos Cabo
-V 2.0 beta
+V 2.1 beta
 https://github.com/carloscabo/jquery-autohide-plugin
-2015 / 11 / 29
+2017 / 10 / 27
 
 // Usage
 $('.element-to-hide-show').autohide_timeout({
@@ -29,8 +29,26 @@ $('.element-to-hide-show').autohide_timeout({
 
         timeout: 1500,
         onEvents: null,
-        onTimeout: null
+        onTimeout: null,
+
+        // Internal methods
+        fn: {
+
+          // Evaluates if target is a proper element or is a functions thst must be executed
+          getTarget: function( el ) {
+            var
+              $el_source = $(el),
+              $target = null;
+            if (typeof this.$target === 'function') {
+              $target = this.$target( $el_source );
+            } else {
+              $target = this.$target;
+            }
+            return $target;
+          }
+        }
       };
+
 
     // Default settings
     $.extend( def, options );
@@ -46,37 +64,32 @@ $('.element-to-hide-show').autohide_timeout({
     // If there isn't a custum onTimeout functionallity
     // whe hide the target element by default.
     if ( def.onTimeout === null ) {
-      def.onTimeout = function() {
-        def.$target.hide();
+      def.onTimeout = function( el ) {
+        ( def.fn.getTarget.call( this, el ) ).hide();
       }
     }
 
     // If there is no custom functionallity we show
     // the target element by default
     if (def.onEvents === null) {
-      def.onEvents = function() {
-        def.$target.show();
+      def.onEvents = function( el ) {
+        /* debugger; */
+        ( def.fn.getTarget.call( this, el ) ).show();
       }
     }
 
     // Events in the source elements
-    def.$source.on( def.events, function(e) {
+    def.$source.on( def.events, function( e ) {
       clearTimeout(def.$el[0].timeout_obj);
 
       var
         source_e = e,
-        $el_source = $(e.target);
+        $el_source = $(e.target),
+        $target = def.fn.getTarget.call( def, $el_source );
 
-      var
-        $target = null;
-      if (typeof def.$target === 'function') {
-        $target = def.$target( $el_source );
-      } else {
-        $target = def.$target;
-      }
       // If there is no custom functionallity we show
       // the target element by default
-      def.onEvents($el_source, $target, source_e );
+      def.onEvents( $el_source, $target, source_e );
 
       $target.off('mouseenter').on('mouseenter', function(e){
         clearTimeout(def.$el[0].timeout_obj);

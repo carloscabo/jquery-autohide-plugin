@@ -66,6 +66,7 @@ $('#element-to-click').autohide_timeout({
       event.preventDefault();
       // console.log( $source );
       // console.log( $target );
+      // console.log( event );
       $source.closest('ul').find('.active').removeClass('active');
       $source.parent('li').addClass('active');
       $('.megadrop').hide();
