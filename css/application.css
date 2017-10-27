@@ -125,42 +125,60 @@ ul#sample-menu-3 > li > ul {
   position: absolute;
   padding: 20px;
   background-color: cyan;
+
+  visibility: hidden;
   opacity: 0;
-  -webkit-transition: opacity 0.25s ease-in-out;
-     -moz-transition: opacity 0.25s ease-in-out;
-      -ms-transition: opacity 0.25s ease-in-out;
-       -o-transition: opacity 0.25s ease-in-out;
-          transition: opacity 0.25s ease-in-out;
+  transition: visibility 0s linear 0.25s, opacity 0.25s ease-in-out;
 }
 
 ul#sample-menu-3 > li.submenu-opened > ul {
+  visibility: visible;
   opacity: 1;
+  transition-delay: 0s;
 }
 
 /* ------------------------------------ */
 /* Multilevel menu with transition      */
 /* ------------------------------------ */
 
-ul#sample-megadrop {
+ul#sample-4-megadrop {
   display: block;
   clear: both;
   padding: 0 0 16px 0;
 }
 
-ul#sample-megadrop > li {
+ul#sample-4-megadrop > li {
   position: relative;
-  padding-bottom: 20px;
+  padding: 10px;
   float: left;
   margin-right: 20px;
 }
 
+ul#sample-4-megadrop > li.active {
+  background-color: orange;
+  color: #000000;
+}
+
+ul#sample-4-megadrop > li.active > a {
+  color: #000000;
+}
+
 .megadrop-wrapper {
   display: block;
+  position: relative;
 }
 
 .megadrop {
   display: none;
-  background-color: #ccc;
+  position: absolute;
+  top: 6px;
+  width: 100%;
+  max-width: 800px;
+  background-color: orange;
+}
+
+.megadrop ul {
+  padding-left: 1em;
 }
 
 .megadrop a {

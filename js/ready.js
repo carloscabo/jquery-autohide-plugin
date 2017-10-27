@@ -57,8 +57,8 @@ $(document).ready(function() {
   // ----------------------------------
   // Sample #4. Megadrop
 
-  var $block_3 = $('#sample-megadrop');
-  $block_3.autohide_timeout({
+  var $sm_4 = $('#sample-4-megadrop');
+  $sm_4.autohide_timeout({
     events: 'mouseenter', // default is click
     timeout: 2000,
     // Children elements inside the parent element
