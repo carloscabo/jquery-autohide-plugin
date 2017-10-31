@@ -3,13 +3,15 @@ JQuery Autohide plugin
 
 Jquery plugin to show / hide / autohide elements, like shopping carts or help bubbles, megadrop menus. That elements' visibility is triggered from another element... usually a button, menu item, etc.
 
+<h3>[View demo]()<h3>
+
 ![Smaple snapshop](https://raw.github.com/carloscabo/jquery-autohide-plugin/master/sample-image.png)
 
 ## 1. Concepts / naming
 
-`$source` elements originating the events. Usually button, menu items, etc.
+`$source` element(s) originating the events. Usually button, menu items, etc.
 
-`$target` elements to be shown when the event is triggerered from a `$source` element. Usually a menu / information overlay... etc.
+`$target` elements **to be shown when the event is triggerered** from a `$source` element. Usually a menu / information overlay... etc.
 
 `timeout` time (in miliseconds) until the `$target` element autohides.
 
@@ -22,9 +24,9 @@ We have a `$souce` element ( `#element-to-click` ), that when the default event 
 `$target` element will autohide with a timeout ( default is 1500ms ).
 
 ```javascript
-$('#element-to-click').autohide_timeout({
-  // timeout: 1000,
-  $target: $('#single-bubble-content')
+$('#element-to-be-clicked').autohide_timeout({
+  // timeout: 1500, // Default
+  $target: $('#conten-to-be-shown')
 });
 ```
 
@@ -41,6 +43,7 @@ $('#element-to-click').autohide_timeout({
     events: 'mouseenter',
 
     // Timeout until the 'onTimeout' function is launched
+    // Default is 1500
     timeout: 2000,
 
     // $source is used to have several interactive children
@@ -91,8 +94,8 @@ $('#element-to-click').autohide_timeout({
 
 ### 3. Hidding $target element from JS
 
-You can force the 
+You can force the closing event from JS using:
 
-## Demos
-
-Take a look to the demos to see some typical usage scenarios.
+```javascript
+$(element).data('plugin_autohide_timeout').settings.onTimeout();
+```

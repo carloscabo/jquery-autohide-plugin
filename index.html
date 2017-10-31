@@ -17,11 +17,19 @@
   <h3 id="section-sample-1">Sample #1. #single-bubble-button</h3>
   <p>Easiest sample, simple show / hide element binding link with #ID and content layer with another <b>unique #ID</b></p>
 
-  <span id="single-bubble-button"><a href="#">Simple bubble on-click</a>
-    <div id="single-bubble-content">
+  <span class="single-bubble" id="single-bubble-button-a"><a href="#">Simple bubble on-click</a>
+    <div class="single-bubble-content" id="single-bubble-content-a">
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, beatae. Tempore autem, eveniet nulla voluptate culpa commodi magni!</p>
     </div>
   </span>
+
+  <span class="single-bubble" id="single-bubble-button-b"><a href="#">Simple bubble on-click, timeout 10s</a>
+    <div class="single-bubble-content" id="single-bubble-content-b">
+      <p><b>Waits 10s then closes.</b><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, beatae. Tempore autem, eveniet nulla voluptate culpa commodi magni!</p>
+    </div>
+  </span>
+
+  <span id="close-both-bubbles">Force close both bubles!</span>
 
   <hr>
 
@@ -143,7 +151,7 @@
 <br>
 <hr>
 
-<h3 id="section-sample-4">Sample #5. Megadrop slide-up/down</h3>
+<h3 id="section-sample-4">Sample #5. Megadrop slide-down</h3>
 <p>Another common scenario, several megadrops, outside the nav container slided-down / up with jQuery</p>
 
 <ul id="sample-5-megadrop">

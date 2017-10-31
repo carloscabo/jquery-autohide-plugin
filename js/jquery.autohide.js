@@ -126,9 +126,9 @@ $('.element-to-hide-show').autohide_timeout({
       return $target;
     }, // getTarget
 
-    close: function() {
-
-    } // close
+    destroy: function() {
+      // To do
+    } // destroy
 
   } );
 

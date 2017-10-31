@@ -4,9 +4,21 @@ $(document).ready(function() {
 
   // ----------------------------------
   // Smaple #1
-  $('#single-bubble-button > a').autohide_timeout({
+  $('#single-bubble-button-a > a').autohide_timeout({
     timeout: 1000,
-    $target: $('#single-bubble-content')
+    $target: $('#single-bubble-content-a')
+  });
+
+  $('#single-bubble-button-b > a').autohide_timeout({
+    timeout: 10000,
+    events: 'click mouseenter',
+    $target: $('#single-bubble-content-b')
+  });
+
+  $('#close-both-bubbles').on('click', function(e){
+    $('.single-bubble > a').each(function( idx, el ){
+      $(el).data('plugin_autohide_timeout').settings.onTimeout();
+    })
   });
 
   // ----------------------------------
@@ -119,14 +131,14 @@ $(document).ready(function() {
       // console.log( $target );
       $source.closest('ul').find('.active').removeClass('active');
       $source.parent('li').addClass('active');
-      $('.megadrop-wrapper-5 .megadrop').slideUp();
-      $target.slideDown();
+      $('.megadrop-wrapper-5 .megadrop').not($target).stop().fadeOut();
+      $target.stop().slideDown();
     },
     // What to do when is timeout is triggered
     onTimeout: function( $source, $target, event ) {
       // console.log( $source );
       $source.parent('li').removeClass('active');
-      $('.megadrop-wrapper-5 .megadrop').slideUp();
+      $('.megadrop-wrapper-5 .megadrop').stop().slideUp();
     }
   });
 

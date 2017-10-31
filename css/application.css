@@ -59,11 +59,13 @@ li.active {
   color: #000;
 }
 
-#single-bubble-button {
+.single-bubble {
   position: relative;
+  display: inline-block;
+  margin-right: 20px;
 }
 
-#single-bubble-content {
+.single-bubble-content {
   display: none;
   position: absolute;
   width: 300px; /* height: 150px; */
@@ -73,7 +75,7 @@ li.active {
   z-index: 9;
 }
 
-#single-bubble-content p {
+.single-bubble-content p {
   margin: 0;
 }
 
