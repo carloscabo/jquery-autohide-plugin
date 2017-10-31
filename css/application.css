@@ -11,13 +11,30 @@ body {
 a {
   color: #ccc;
 }
+
+li li a {
+  color: #000000;
+}
+
 a:hover {
   color: #fff;
 }
 
+h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
 p {
-  max-width: 500px;
+  max-width: 800px;
+  margin: 1em 0;
   color: #999;
+}
+
+b {
+  color: #ffffff;
 }
 
 span {
@@ -29,6 +46,11 @@ ul, ol, li {
   list-style: none;
 }
 
+hr {
+  width: 100%;
+  margin: 1.5em 0;
+}
+
 /* Demos */
 /* Single element with buble and ID */
 
@@ -37,96 +59,134 @@ li.active {
   color: #000;
 }
 
-#single-bubble-button {
+.single-bubble {
   position: relative;
+  display: inline-block;
+  margin-right: 20px;
 }
 
-#single-bubble-content {
+.single-bubble-content {
   display: none;
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 300px; /* height: 150px; */
   padding: 1em;
   background-color: #fff;
   border: 1px solid #666;
   z-index: 9;
 }
 
-/* Multilevel menu */
+.single-bubble-content p {
+  margin: 0;
+}
 
-ul#sample-menu {
+/* ------------------------------------ */
+/* Multilevel menu                      */
+/* ------------------------------------ */
+
+ul#sample-menu-2 {
   padding: 0;
 }
 
-ul#sample-menu > li {
+ul#sample-menu-2 > li {
   position: relative;
   float: left;
   margin-right: 20px;
 }
 
 /*  Hidding 2nd level menu */
-ul#sample-menu > li > ul {
+ul#sample-menu-2 > li > ul {
   display: none;
-  width: 120px;
+  width: 160px;
   position: absolute;
   padding: 20px;
   background-color: pink;
+  z-index: 3;
 }
 
-ul#sample-menu > li > ul.submenu-opened {
+ul#sample-menu-2 > li > ul.submenu-opened {
   display: block;
 }
 
-/* Multilevel menu with transition */
+/* ------------------------------------ */
+/* Multilevel menu with transition      */
+/* ------------------------------------ */
 
-ul#another-sample-menu {
+ul#sample-menu-3 {
   padding: 0;
 }
 
-ul#another-sample-menu > li {
+ul#sample-menu-3 > li {
   position: relative;
   float: left;
   margin-right: 20px;
 }
 
 /*  Hidding 2nd level menu */
-ul#another-sample-menu > li > ul {
-  width: 120px;
+ul#sample-menu-3 > li > ul {
+  width: 160px;
   position: absolute;
   padding: 20px;
-  background-color: pink;
+  background-color: cyan;
+
+  visibility: hidden;
   opacity: 0;
-  -webkit-transition: opacity 0.25s ease-in-out;
-     -moz-transition: opacity 0.25s ease-in-out;
-      -ms-transition: opacity 0.25s ease-in-out;
-       -o-transition: opacity 0.25s ease-in-out;
-          transition: opacity 0.25s ease-in-out;
+  transition: visibility 0s linear 0.25s, opacity 0.25s ease-in-out;
 }
 
-ul#another-sample-menu > li.submenu-opened > ul {
+ul#sample-menu-3 > li.submenu-opened > ul {
+  visibility: visible;
   opacity: 1;
+  transition-delay: 0s;
 }
 
-ul#sample-megadrop {
+/* ------------------------------------ */
+/* Multilevel menu with transition      */
+/* ------------------------------------ */
+
+ul#sample-4-megadrop,
+ul#sample-5-megadrop {
   display: block;
   clear: both;
   padding: 0 0 16px 0;
 }
 
-ul#sample-megadrop > li {
+ul#sample-4-megadrop > li,
+ul#sample-5-megadrop > li {
   position: relative;
-  padding-bottom: 20px;
+  padding: 10px;
   float: left;
   margin-right: 20px;
 }
 
-.megadrop-wrapper {
+ul#sample-4-megadrop > li.active,
+ul#sample-5-megadrop > li.active {
+  background-color: orange;
+  color: #000000;
+}
+
+ul#sample-4-megadrop > li.active > a,
+ul#sample-5-megadrop > li.active > a {
+  color: #000000;
+}
+
+.megadrop-wrapper,
+.megadrop-wrapper-4,
+.megadrop-wrapper-5 {
   display: block;
+  position: relative;
 }
 
 .megadrop {
   display: none;
-  background-color: #ccc;
+  position: absolute;
+  top: 6px;
+  width: 100%;
+  max-width: 800px;
+  background-color: orange;
+}
+
+.megadrop ul {
+  padding-left: 1em;
 }
 
 .megadrop a {
