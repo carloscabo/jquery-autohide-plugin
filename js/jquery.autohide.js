@@ -25,7 +25,7 @@ $('.element-to-hide-show').autohide_timeout({
         $el: $(el),
         $source: null,
         $target: null,
-        events: 'click',
+        events: 'click', // Will be renamed to click.ahto on init
 
         timeout: 1500,
         onEvents: null,
@@ -69,6 +69,9 @@ $('.element-to-hide-show').autohide_timeout({
       }
     }
 
+    // We subfix the events with namespace ahto
+    def.events = def.events.replace(/\b(\w)+\b/gim, '$&.ahto');
+
     // If there is no custom functionallity we show
     // the target element by default
     if (def.onEvents === null) {
@@ -91,16 +94,16 @@ $('.element-to-hide-show').autohide_timeout({
       // the target element by default
       def.onEvents( $el_source, $target, source_e );
 
-      $target.off('mouseenter').on('mouseenter', function(e){
+      $target.off('mouseenter.ahto').on('mouseenter.ahto', function(e){
         clearTimeout(def.$el[0].timeout_obj);
-      }).off('mouseleave').on('mouseleave', function(e){
+      }).off('mouseleave.ahto').on('mouseleave.ahto', function(e){
         def.$el[0].timeout_obj = setTimeout(function(){
           def.onTimeout( $el_source, $target, source_e);
           clearTimeout(def.$el[0].timeout_obj);
         }, def.timeout);
       });
 
-    }).on( 'mouseleave', function( e ) {
+    }).on( 'mouseleave.ahto', function( e ) {
 
       var
         source_e = e,

@@ -5,7 +5,7 @@ Jquery plugin to show / hide / autohide elements, like shopping carts or help bu
 
 ![Smaple snapshop](https://raw.github.com/carloscabo/jquery-autohide-plugin/master/sample-image.png)
 
-## Concepts / naming
+## 1. Concepts / naming
 
 `$source` elements originating the events. Usually button, menu items, etc.
 
@@ -13,7 +13,7 @@ Jquery plugin to show / hide / autohide elements, like shopping carts or help bu
 
 `timeout` time (in miliseconds) until the `$target` element autohides.
 
-## Usage
+## 2. Usage
 
 ### 2.1 Easiest sample
 
@@ -86,6 +86,12 @@ $('#element-to-click').autohide_timeout({
   });
 
 ```
+
+## 3. Other methods
+
+### 3. Hidding $target element from JS
+
+You can force the 
 
 ## Demos
 
