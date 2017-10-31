@@ -54,7 +54,7 @@ $('.element-to-hide-show').autohide_timeout({
     $.extend( def, options );
 
     // If there are no $source elements in options
-    // the source of events is the elment itself
+    // the source of events is the element itself
     if ( typeof def.$source === 'function' ) {
       def.$source = def.$source( def.$el );
     } else if ( def.$source === null) {
