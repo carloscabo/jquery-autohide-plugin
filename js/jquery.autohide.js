@@ -65,6 +65,7 @@ $('.element-to-hide-show').autohide_timeout({
     // whe hide the target element by default.
     if ( def.onTimeout === null ) {
       def.onTimeout = function( el ) {
+        clearTimeout(def.$el[0].timeout_obj);
         ( def.fn.getTarget.call( this, el ) ).hide();
       }
     }
@@ -98,8 +99,8 @@ $('.element-to-hide-show').autohide_timeout({
         clearTimeout(def.$el[0].timeout_obj);
       }).off('mouseleave.ahto').on('mouseleave.ahto', function(e){
         def.$el[0].timeout_obj = setTimeout(function(){
-          def.onTimeout( $el_source, $target, source_e);
           clearTimeout(def.$el[0].timeout_obj);
+          def.onTimeout( $el_source, $target, source_e);
         }, def.timeout);
       });
 
@@ -111,8 +112,8 @@ $('.element-to-hide-show').autohide_timeout({
         $target = def.fn.getTarget.call( def, $el_source );
 
       def.$el[0].timeout_obj = setTimeout(function(){
-        def.onTimeout( $el_source, $target, e );
         clearTimeout(def.$el[0].timeout_obj);
+        def.onTimeout( $el_source, $target, source_e );
       }, def.timeout);
 
     });
