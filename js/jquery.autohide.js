@@ -13,122 +13,134 @@ $('.element-to-hide-show').autohide_timeout({
 });
 */
 
-(function ($) {
+;( function ( $, window, document, undefined ) {
 
-  function Constructor( el, options ) {
-    var
-      that = this,
-      DEBUG = false,
+  "use strict";
 
-      // Default options
-      def = {
-        $el: $(el),
-        $source: null,
-        $target: null,
-        events: 'click', // Will be renamed to click.ahto on init
+  // Create the defaults once
+  var
+    plugin_name = "autohide_timeout",
+    defaults = {
+      $el:     null,
+      $source: null,
+      $target: null,
+      events: 'click', // Will be renamed to click.ahto on init
 
-        timeout: 1500,
-        onEvents: null,
-        onTimeout: null,
+      timeout:   1500,
+      onEvents:  null,
+      onTimeout: null
+    };
 
-        // Internal methods
-        fn: {
+  // Constructor
+  function Ahto( el, options ) {
+    this.$el = $(el);
+    this.settings = $.extend( {}, defaults, options );
+    this._defaults = defaults;
+    this._name = plugin_name;
+    this.init();
+  }
 
-          // Evaluates if target is a proper element or is a functions thst must be executed
-          getTarget: function( el ) {
-            var
-              $el_source = $(el),
-              $target = null;
-            if (typeof this.$target === 'function') {
-              $target = this.$target( $el_source );
-            } else {
-              $target = this.$target;
-            }
-            return $target;
-          }
-        }
-      };
-
-
-    // Default settings
-    $.extend( def, options );
-
-    // If there are no $source elements in options
-    // the source of events is the element itself
-    if ( typeof def.$source === 'function' ) {
-      def.$source = def.$source( def.$el );
-    } else if ( def.$source === null) {
-      def.$source = def.$el;
-    }
-
-    // If there isn't a custum onTimeout functionallity
-    // whe hide the target element by default.
-    if ( def.onTimeout === null ) {
-      def.onTimeout = function( el ) {
-        clearTimeout(def.$el[0].timeout_obj);
-        ( def.fn.getTarget.call( this, el ) ).hide();
-      }
-    }
-
-    // We subfix the events with namespace ahto
-    def.events = def.events.replace(/\b(\w)+\b/gim, '$&.ahto');
-
-    // If there is no custom functionallity we show
-    // the target element by default
-    if (def.onEvents === null) {
-      def.onEvents = function( el ) {
-        /* debugger; */
-        ( def.fn.getTarget.call( this, el ) ).show();
-      }
-    }
-
-    // Events in the source elements
-    def.$source.on( def.events, function( e ) {
-      clearTimeout(def.$el[0].timeout_obj);
+  // Default settings
+  $.extend( Ahto.prototype, {
+    init: function() {
 
       var
-        source_e = e,
-        $el_source = $(e.target),
-        $target = def.fn.getTarget.call( def, $el_source );
+        _t = this;
+
+      // We subfix the events with namespace ahto
+      _t.settings.events = _t.settings.events.replace(/\b(\w)+\b/gim, '$&.'+_t._name);
+
+      // If there are no $source elements in options
+      // the source of events is the element itself
+      if ( typeof _t.settings.$source === 'function' ) {
+        _t.settings.$source = _t.settings.$source( _t.$el );
+      } else if ( _t.settings.$source === null) {
+        _t.settings.$source = _t.$el;
+      }
+
+      // If there isn't a custum onTimeout functionallity
+      // whe hide the target element by default.
+      if ( _t.settings.onTimeout === null ) {
+        _t.settings.onTimeout = function( el ) {
+          ( _t.getTarget( el ) ).hide();
+          clearTimeout(_t.$el[0].timeout_obj);
+        }
+      }
 
       // If there is no custom functionallity we show
       // the target element by default
-      def.onEvents( $el_source, $target, source_e );
+      if ( _t.settings.onEvents === null) {
+        _t.settings.onEvents = function( el ) {
+          ( _t.getTarget( el ) ).show();
+        }
+      }
 
-      $target.off('mouseenter.ahto').on('mouseenter.ahto', function(e){
-        clearTimeout(def.$el[0].timeout_obj);
-      }).off('mouseleave.ahto').on('mouseleave.ahto', function(e){
-        def.$el[0].timeout_obj = setTimeout(function(){
-          clearTimeout(def.$el[0].timeout_obj);
-          def.onTimeout( $el_source, $target, source_e);
-        }, def.timeout);
+      // Attaching events
+      // Events in the source elements
+      _t.settings.$source.on( _t.settings.events, function( e ) {
+        clearTimeout(_t.$el[0].timeout_obj);
+
+        var
+          source_e = e,
+          $el_source = $(e.target),
+          $target = _t.getTarget( $el_source );
+
+        // If there is no custom functionallity we show
+        // the target element by default
+        _t.settings.onEvents( $el_source, $target, source_e );
+
+        $target.off('mouseenter.'+_t._name).on('mouseenter.'+_t._name, function(e){
+          clearTimeout(_t.$el[0].timeout_obj);
+        }).off('mouseleave.'+_t._name).on('mouseleave.'+_t._name, function(e){
+          _t.$el[0].timeout_obj = setTimeout( function(){
+            clearTimeout( _t.$el[0].timeout_obj );
+            _t.settings.onTimeout( $el_source, $target, source_e);
+          }, _t.settings.timeout);
+        });
+
+      }).on( 'mouseleave.'+_t._name, function( e ) {
+
+        var
+          source_e = e,
+          $el_source = $(e.target),
+          $target = _t.getTarget.call( _t, $el_source );
+
+        _t.$el[0].timeout_obj = setTimeout(function(){
+          clearTimeout( _t.$el[0].timeout_obj );
+          _t.settings.onTimeout( $el_source, $target, source_e );
+        }, _t.settings.timeout);
+
       });
 
-    }).on( 'mouseleave.ahto', function( e ) {
+    }, // init
 
+    getTarget: function( el ) {
       var
-        source_e = e,
-        $el_source = $(e.target),
-        $target = def.fn.getTarget.call( def, $el_source );
+        $el_source = $(el),
+        $target = null;
+      if (typeof this.settings.$target === 'function') {
+        $target = this.settings.$target( $el_source );
+      } else {
+        $target = this.settings.$target;
+      }
+      return $target;
+    }, // getTarget
 
-      def.$el[0].timeout_obj = setTimeout(function(){
-        clearTimeout(def.$el[0].timeout_obj);
-        def.onTimeout( $el_source, $target, source_e );
-      }, def.timeout);
+    close: function() {
 
-    });
+    } // close
 
-  };
+  } );
 
   // JQuery hook
-  $.fn.autohide_timeout = function (options) {
+  $.fn[ plugin_name ] = function (options) {
     return this.each(function () {
       var $this = $(this);
-      if (!$this.data('autohide_timeout')) {
-        $this.data('autohide_timeout', new Constructor(this, options));
+      if (!$this.data('plugin_'+ plugin_name )) {
+        $this.data('plugin_'+ plugin_name, new Ahto( this, options ));
       }
     });
   };
 
 
-} (jQuery));
+} )( jQuery, window, document );
