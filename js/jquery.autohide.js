@@ -107,15 +107,8 @@ $('.element-to-hide-show').autohide_timeout({
 
       var
         source_e = e,
-        $el_source = $(e.target);
-
-      var
-        $target = null;
-      if (typeof def.$target === 'function') {
-        $target = def.$target( $el_source );
-      } else {
-        $target = def.$target;
-      }
+        $el_source = $(e.target),
+        $target = def.fn.getTarget.call( def, $el_source );
 
       def.$el[0].timeout_obj = setTimeout(function(){
         def.onTimeout( $el_source, $target, e );
