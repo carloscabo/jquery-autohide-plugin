@@ -10,7 +10,7 @@ $(document).ready(function() {
   });
 
   $('#single-bubble-button-b > a').autohide_timeout({
-    timeout: 10000,
+    timeout: 9999,
     events: 'click mouseenter',
     $target: $('#single-bubble-content-b')
   });
