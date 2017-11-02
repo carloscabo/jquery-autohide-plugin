@@ -3,7 +3,7 @@ JQuery Autohide plugin v2.1 beta
 
 Jquery plugin to show / hide / autohide elements, like **shopping carts or help bubbles, megadrop menus.** That elements' visibility is triggered from another element... usually a button, menu item, etc. with a timeout.
 
-[Watch the demo included in the repo](https://htmlpreview.github.io/?https://raw.githubusercontent.com/carloscabo/jquery-autohide-plugin/master/index.html)
+[Watch the demo included in the repo](https://rawgit.com/carloscabo/jquery-autohide-plugin/master/index.html)
 
 ![Snapshot](https://raw.githubusercontent.com/carloscabo/jquery-autohide-plugin/master/img/snapshot.gif)
 
