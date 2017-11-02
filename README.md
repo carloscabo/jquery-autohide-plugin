@@ -26,7 +26,7 @@ We have a `$souce` element ( `#element-to-click` ), that when the default event 
 ```javascript
 $('#element-to-be-clicked').autohide_timeout({
   // timeout: 1500, // Default
-  $target: $('#conten-to-be-shown')
+  $target: $('#content-to-be-shown')
 });
 ```
 
